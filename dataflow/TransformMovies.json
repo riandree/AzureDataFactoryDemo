@@ -3,11 +3,38 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "MoviesDB",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesDB"
+				}
+			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "FilterYears"
+				},
+				{
+					"name": "AggregateComedyRatings"
+				}
+			],
 			"scriptLines": [
-				""
+				"source(output(",
+				"          movies as string,",
+				"          Title as string,",
+				"          genresgenregenre as string,",
+				"          YEAR as string,",
+				"          Rating as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> MoviesDB",
+				"MoviesDB filter(toInteger(YEAR) >= 1910 && toInteger(YEAR) <= 2000 && rlike(genresgenregenre, \"Comedy\")) ~> FilterYears",
+				"FilterYears aggregate(groupBy(YEAR),",
+				"     Blubb = avg(toInteger(Rating))) ~> AggregateComedyRatings"
 			]
 		}
 	}
