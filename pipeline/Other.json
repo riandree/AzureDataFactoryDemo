@@ -1,7 +1,6 @@
 {
 	"name": "Other",
 	"properties": {
-		"annotations": [],
 		"activities": [
 			{
 				"name": "Data flow1",
@@ -16,10 +15,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "TransformMovies2",
-						"type": "DataFlowReference"
-					},
 					"compute": {
 						"coreCount": 2,
 						"computeType": "General"
@@ -28,5 +23,6 @@
 				}
 			}
 		],
+		"annotations": []
 	}
 }
